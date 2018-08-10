@@ -1,0 +1,63 @@
+server:
+  port: 8550
+
+spring:
+  application:
+    name: gzfwpt-system
+
+#  cloud:
+#    bus:
+#      trace:
+#        enabled: true
+#    config:
+#      label: master
+#      profile: dev
+#      discovery:
+#        enabled: true
+#        service-id: cloud-config-server
+
+  rabbitmq:
+#    host: 192.168.10.49
+    host: 127.0.0.1
+    port: 5672
+    username: rabbit
+    password: 123654
+  zipkin:
+    enabled: true
+  sleuth:
+    sampler:
+      percentage: 1.0
+  datasource:
+    url: jdbc:mysql://192.168.10.219:3306/gzfwpt
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+  mvc:
+    view:
+      prefix: /WEB-INF/pages/jsp/
+      suffix: .jsp
+  resources:
+    static-locations: /WEB-INF/resource/
+  redis:
+#    host: 127.0.0.1
+    host: 192.168.10.219
+    port: 6379
+  session:
+    store-type: redis
+
+
+logging:
+  level:
+    com:
+      turbur:
+        mapper: DEBUG
+
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://user:password@192.168.10.57:8761/eureka #注册服务地址
+      defaultZone: http://user:password@localhost:8761/eureka #注册服务地址
+  instance:
+    prefer-ip-address: true #是否显示地址为IP地址
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+    appname: gzfwpt-system #自定义后台的实例名
