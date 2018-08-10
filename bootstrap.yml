@@ -1,0 +1,41 @@
+#服务端口
+server:
+  port: 8888
+
+#服务注册中心配置
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+#    lease-renewal-interval-in-seconds: 1
+#    lease-expiration-duration-in-seconds: 2
+#  client:
+#    service-url:
+#      defaultZone: http://user:password@192.168.10.219:8761/eureka #service注册url与密码
+#spring设置
+spring:
+  application:
+    name: cloud-config-server
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+#          uri: http://zhaohl_hyeb@192.168.10.205:10101/r/~zhaohl_hyeb/gzfupt-config-repo
+#          username: zhaohl_hyeb
+#          password: 123456
+          search-paths:
+            - zuul-server
+            - zipkin-server
+            - gzfwpt-cms
+            - gzfwpt-system
+            - gzfwpt-ticket
+            - gzfwpt-user
+            - gzfwpt-user-service
+          uri: https://github.com/xulizheng66/Record
+
+#  rabbitmq:
+#    host: 192.168.10.55
+#    port: 5672
+#    username: test
+#    password: test123
